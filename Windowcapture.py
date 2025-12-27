@@ -4,6 +4,7 @@ import pygetwindow as gw
 import time
 import keyboard
 import os
+import numpy as np
 
 folder_path = "Resources" #Fodlerpath
 check = 1
@@ -20,9 +21,18 @@ while check == 1:
         x, y, width, height = RobloxWindow.left, RobloxWindow.top, RobloxWindow.width, RobloxWindow.height
         filename = f"TheForge_{int(time.time())}.png"
         full_path = os.path.join(folder_path, filename)
+        
         screenshot = pag.screenshot(full_path,region=(x,y,width,height))
-        cv.imread(full_path)
-        cv.imshow("Screenshot",full_path)
+        
+        img_np = np.array(screenshot)
+        img_show= cv.cvtColor(img_np, cv.COLOR_RGB2BGR)
+        cv.resize(img_show, (854,480))
+        
+        cv.imshow("Screenshot",img_show)
+        cv.waitKey(1)
+        show = gw.getWindowsWithTitle("Screenshot")[0]
+        if show.isMinimized:
+            show.restore()
         
         print("บันทึกเรียบร้อย")
     
