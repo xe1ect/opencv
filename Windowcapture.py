@@ -30,9 +30,6 @@ while check == 1:
         
         cv.imshow("Screenshot",img_show)
         cv.waitKey(1)
-        show = gw.getWindowsWithTitle("Screenshot")[0]
-        if show.isMinimized:
-            show.restore()
         
         print("บันทึกเรียบร้อย")
     
